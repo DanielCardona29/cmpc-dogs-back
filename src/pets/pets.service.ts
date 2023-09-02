@@ -1,32 +1,26 @@
 import { Injectable } from '@nestjs/common';
-import { pets } from 'src/pets/pets.entities';
-
-import { v4 } from 'uuid';
+import { CreatePetDto } from './dto/create-pet.dto';
+import { UpdatePetDto } from './dto/update-pet.dto';
 
 @Injectable()
 export class PetsService {
-
-  private pets: pets = {
-    ID: 'default',
-    Age: 0,
-    Gender: 'default',
-    BreedID: 'default',
-    Characteristics: {},
-    Color: 'default',
-    Name: 'default',
+  create(createPetDto: CreatePetDto) {
+    return 'This action adds a new pet';
   }
 
-  getAllPets() {
-    return this.pets;
+  findAll() {
+    return `This action returns all pets`;
   }
-  createPets(petInfo: pets) {
-    const pet = {
-      ...this.pets,
-      ID: v4(),
-      ...petInfo
-    }
-    return pet;
+
+  findOne(id: number) {
+    return `This action returns a #${id} pet`;
   }
-  updatePets() { }
-  deletePets() { }
+
+  update(id: number, updatePetDto: UpdatePetDto) {
+    return `This action updates a #${id} pet`;
+  }
+
+  remove(id: number) {
+    return `This action removes a #${id} pet`;
+  }
 }
