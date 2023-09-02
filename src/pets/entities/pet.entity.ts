@@ -1,11 +1,10 @@
 export class Pet {
-    id?: number
+    id?: string
     name: string
     age: string
     color: string
     characteristics: string
-    keywords: string[]
+    keywords: string
     breedId: string
     subBreedID: string
-    veterinarianID: string
 }

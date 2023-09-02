@@ -2,7 +2,7 @@ import { Column, ForeignKey, PrimaryKey, Table, Model } from "sequelize-typescri
 import { breeds } from "src/breeds/schema/breeds.schema";
 
 @Table
-export class subbreeds  extends Model {
+export class subbreeds extends Model {
     @PrimaryKey
     @Column
     id: String
@@ -16,5 +16,5 @@ export class subbreeds  extends Model {
 
     @ForeignKey(() => breeds)
     @Column
-    breedId: string
+    breed: string
 }

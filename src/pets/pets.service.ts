@@ -1,15 +1,31 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
 import { CreatePetDto } from './dto/create-pet.dto';
 import { UpdatePetDto } from './dto/update-pet.dto';
+import { pets } from './schema/pets.schema';
+import { DEFAULT_PET, PETS_RFEPOSITORY } from 'src/constants';
 
 @Injectable()
 export class PetsService {
-  create(createPetDto: CreatePetDto) {
-    return 'This action adds a new pet';
+
+  constructor(@Inject(PETS_RFEPOSITORY) private petsProviders: typeof pets) { }
+
+  create(pet: CreatePetDto) {
+
+    try {
+      const pet = {
+        ...DEFAULT_PET,
+        ...pets
+      }
+
+      return this.petsProviders.create(pet);
+    } catch (error) {
+      return 'Data  base error'
+    }
+
   }
 
   findAll() {
-    return `This action returns all pets`;
+    return this.petsProviders.findAll();
   }
 
   findOne(id: number) {
