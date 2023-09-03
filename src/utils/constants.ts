@@ -5,6 +5,8 @@
 
 import { v4 } from "uuid";
 import { Pet } from "../pets/entities/pet.entity";
+import { breedsEntity } from "src/breeds/entities/breed.entity";
+import { SubbreedEntity } from "src/subbreeds/entities/subbreed.entity";
 
 export const PETS_RFEPOSITORY = 'PETS_RFEPOSITORY';
 
@@ -39,4 +41,18 @@ export const DEFAULT_PET: Pet =  {
     keywords: "",
     subBreedID: "N/A",
 } 
+
+
+export const DEFAULT_BREED: breedsEntity = {
+    commonName: "default",
+    keywords: "",
+    scientificName: "default"
+}
+
+export const DEFAULT_SUBBREED: SubbreedEntity = {
+    commonName: "default",
+    keywords: "",
+    scientificName: "default",
+    breed: ""
+}
 

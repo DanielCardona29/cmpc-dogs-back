@@ -5,11 +5,11 @@ import { UpdateBreedDto } from './dto/update-breed.dto';
 
 @Controller('breeds')
 export class BreedsController {
-  constructor(private readonly breedsService: BreedsService) {}
+  constructor(private breedsService: BreedsService) {}
 
   @Post()
-  create(@Body() createBreedDto: CreateBreedDto) {
-    return this.breedsService.create(createBreedDto);
+  create(@Body() body: CreateBreedDto) {
+    return this.breedsService.create(body);
   }
 
   @Get()

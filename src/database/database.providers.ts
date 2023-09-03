@@ -1,4 +1,5 @@
 import { Sequelize } from "sequelize-typescript";
+
 import { pets } from '../pets/schema/pets.schema'
 import { breeds } from '../breeds/schema/breeds.schema'
 import { subbreeds } from "src/subbreeds/schema/subbreeds.schema";

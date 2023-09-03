@@ -1,8 +1,11 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { CreatePetDto } from './dto/create-pet.dto';
 import { UpdatePetDto } from './dto/update-pet.dto';
+
 import { pets } from './schema/pets.schema';
+
 import { DEFAULT_PET, PETS_RFEPOSITORY } from 'src/utils/constants';
+
 import { errorsManager } from 'src/utils/errorsManager';
 import { searchDTO } from './dto/search.dto';
 import { Op } from '@sequelize/core';
@@ -125,19 +128,9 @@ export class PetsService {
     }
   }
 
-  async update(id: string, updatePetDto: UpdatePetDto) {
-
+  async update(id: string, updatePet: UpdatePetDto) {
     try {
-      const searchPet = await this.findOne(id);
-      if (!searchPet) throw new Error("Get document");
-      const updatePet = {
-        ...searchPet,
-        ...updatePetDto
-      }
-
-      return this.petsProviders.update(updatePet, { where: { id, }, returning: true }
-      )
-
+      return this.petsProviders.update(updatePet, { where: { id, }, returning: true })
     } catch (error) {
       return errorsManager("Error update", error)
     }

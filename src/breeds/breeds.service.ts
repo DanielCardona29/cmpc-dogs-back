@@ -1,26 +1,57 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
 import { CreateBreedDto } from './dto/create-breed.dto';
 import { UpdateBreedDto } from './dto/update-breed.dto';
+import { BREEDS_RFEPOSITORY, DEFAULT_BREED } from 'src/utils/constants';
+import { breeds } from './schema/breeds.schema';
+import { errorsManager } from 'src/utils/errorsManager';
 
 @Injectable()
 export class BreedsService {
-  create(createBreedDto: CreateBreedDto) {
-    return 'This action adds a new breed';
+
+  constructor(@Inject(BREEDS_RFEPOSITORY) private breedsProvider: typeof breeds) { }
+
+  create(breedRequest: CreateBreedDto) {
+    try {
+
+      const newBreed = {
+        ...DEFAULT_BREED,
+        ...breedRequest
+      }
+      return this.breedsProvider.create(newBreed);
+    } catch (error) {
+      return errorsManager('Error creating breed', error)
+    }
   }
 
   findAll() {
-    return `This action returns all breeds`;
+    try {
+      return this.breedsProvider.findAll();
+    } catch (error) {
+      return errorsManager('Error in search', error)
+    }
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} breed`;
+    try {
+      return this.breedsProvider.findByPk(id);
+    } catch (error) {
+      return errorsManager('Error in search by  id', error)
+    }
   }
 
-  update(id: number, updateBreedDto: UpdateBreedDto) {
-    return `This action updates a #${id} breed`;
+  update(id: number, updatedBreed: UpdateBreedDto) {
+    try {
+      return this.breedsProvider.update(updatedBreed, { where: { id }, returning: true });
+    } catch (error) {
+      return errorsManager('Error in update', error)
+    }
   }
 
   remove(id: number) {
-    return `This action removes a #${id} breed`;
+    try {
+      return this.breedsProvider.destroy({ where: { id } });
+    } catch (error) {
+      return errorsManager('Error in remove', error)
+    }
   }
 }

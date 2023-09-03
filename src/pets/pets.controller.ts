@@ -36,7 +36,6 @@ export class PetsController {
   }
 
 
-  @Put(':id')
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePetDto: UpdatePetDto) {
     return this.petsService.update(id, updatePetDto);
