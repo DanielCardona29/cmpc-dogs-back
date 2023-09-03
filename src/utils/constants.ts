@@ -4,7 +4,7 @@
  */
 
 import { v4 } from "uuid";
-import { Pet } from "./pets/entities/pet.entity";
+import { Pet } from "../pets/entities/pet.entity";
 
 export const PETS_RFEPOSITORY = 'PETS_RFEPOSITORY';
 
@@ -31,7 +31,6 @@ export const SEQUELIZE = 'SEQUELIZE';
 
 
 export const DEFAULT_PET: Pet =  {
-    id: v4(),
     name: 'default',
     age: '0',
     breedId: 'N/A',
@@ -40,3 +39,4 @@ export const DEFAULT_PET: Pet =  {
     keywords: "",
     subBreedID: "N/A",
 } 
+

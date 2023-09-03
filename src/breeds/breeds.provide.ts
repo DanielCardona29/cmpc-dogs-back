@@ -1,4 +1,4 @@
-import { BREEDS_RFEPOSITORY } from "../constants";
+import { BREEDS_RFEPOSITORY } from "../utils/constants";
 import { CreateBreedDto } from "src/breeds/dto/create-breed.dto";
 
 export const breedsProviders = [

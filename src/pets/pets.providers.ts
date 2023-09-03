@@ -1,5 +1,5 @@
 import { pets } from "./schema/pets.schema";
-import { PETS_RFEPOSITORY } from "../constants";
+import { PETS_RFEPOSITORY } from "../utils/constants";
 
 export const petsProviders = [
     {
