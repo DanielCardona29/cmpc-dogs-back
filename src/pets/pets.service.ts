@@ -4,10 +4,10 @@ import { UpdatePetDto } from './dto/update-pet.dto';
 import { pets } from './schema/pets.schema';
 import { DEFAULT_PET, PETS_RFEPOSITORY } from 'src/utils/constants';
 import { errorsManager } from 'src/utils/errorsManager';
-import { searchInterface } from 'src/subbreeds/entities/search.entity';
-import { searchKeyWords } from 'src/utils/search';
-import { Sequelize } from 'sequelize-typescript';
+import { searchDTO } from './dto/search.dto';
 import { Op } from '@sequelize/core';
+import { filtersDto } from './dto/filters.dto';
+import { filtersListJoin } from 'src/utils/filterListJoin';
 
 @Injectable()
 export class PetsService {
@@ -15,27 +15,25 @@ export class PetsService {
   constructor(@Inject(PETS_RFEPOSITORY) private petsProviders: typeof pets) { }
 
   create(pet: CreatePetDto) {
-
     try {
       const newPet = {
         ...DEFAULT_PET,
         ...pet
-      }
+      };
       return this.petsProviders.create(newPet);
     } catch (error) {
-      return errorsManager(error)
+      throw errorsManager('Failed to create pet', error);
     }
-
   }
 
 
-  async search(search: searchInterface) {
+  async search(search: searchDTO) {
 
     const { byName } = search;
 
     return this.petsProviders.findAll({
       where: {
-        name: {
+        breedId: {
           [Op.like]: `%${byName}%` // Utiliza Sequelize.Op.like para buscar el patrón '%w%'
         }
       }
@@ -43,11 +41,77 @@ export class PetsService {
 
   }
 
+  async _searchByBreed(breedId: string) {
+    try {
+
+      let petsList = await this.petsProviders.findAll({
+        where: {
+          breedId: {
+            [Op.like]: `%${breedId}%` // Utiliza Sequelize.Op.like para buscar el patrón '%w%'
+          }
+        }
+      });
+
+      petsList = petsList.map(pet => {
+        return pet.dataValues
+      });
+
+      return petsList;
+
+    } catch (error) {
+      return errorsManager('Error filtring by breed', error)
+    }
+
+  }
+
+
+
+  async _searchBySubBreed(subbreed: string) {
+    try {
+
+      let petsList = await this.petsProviders.findAll({
+        where: {
+          subBreedID: {
+            [Op.like]: `%${subbreed}%` // Utiliza Sequelize.Op.like para buscar el patrón '%w%'
+          }
+        }
+      });
+
+      petsList = petsList.map(pet => {
+        return pet.dataValues
+      });
+
+      return petsList;
+
+    } catch (error) {
+      return errorsManager('Error filtring by breed', error)
+    }
+
+  }
+
+  async filter(filters: filtersDto) {
+    try {
+      const breedsResults = await Promise.all(filters.breeds.map(async (breed) => {
+        return await this._searchByBreed(breed);
+      }))
+
+      const subBreedsResults = await Promise.all(filters.subbreeds.map(async (subBreed: string) => {
+        return await this._searchBySubBreed(subBreed);
+      }))
+
+      return filtersListJoin(breedsResults, subBreedsResults);
+
+    } catch (error) {
+      return errorsManager('Error filter', error)
+    }
+
+  }
+
   findAll() {
     try {
       return this.petsProviders.findAll();
     } catch (error) {
-      return errorsManager(error)
+      return errorsManager('Error find all', error)
     }
   }
 
@@ -57,7 +121,7 @@ export class PetsService {
     try {
       return await this.petsProviders.findByPk(id);
     } catch (error) {
-      return errorsManager(error)
+      return errorsManager('Error find', error)
     }
   }
 
@@ -65,9 +129,7 @@ export class PetsService {
 
     try {
       const searchPet = await this.findOne(id);
-      console.log(searchPet)
       if (!searchPet) throw new Error("Get document");
-
       const updatePet = {
         ...searchPet,
         ...updatePetDto
@@ -77,7 +139,7 @@ export class PetsService {
       )
 
     } catch (error) {
-      return errorsManager(error)
+      return errorsManager("Error update", error)
     }
   }
 

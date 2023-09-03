@@ -2,7 +2,8 @@ import { Controller, Get, Post, Put, Body, Patch, Param, Delete } from '@nestjs/
 import { PetsService } from './pets.service';
 import { CreatePetDto } from './dto/create-pet.dto';
 import { UpdatePetDto } from './dto/update-pet.dto';
-import { searchInterface } from 'src/subbreeds/entities/search.entity';
+import { searchDTO } from './dto/search.dto';
+import { filtersDto } from './dto/filters.dto';
 
 @Controller('pets')
 export class PetsController {
@@ -13,13 +14,17 @@ export class PetsController {
     return this.petsService.create(createPetDto);
   }
 
-  
+
   @Post('/search')
-  search(@Body() body: searchInterface) {
+  search(@Body() body: searchDTO) {
     return this.petsService.search(body)
   }
 
-  
+  @Post('/filters')
+  filter(@Body() body: filtersDto) {
+    return this.petsService.filter(body)
+  }
+
   @Get()
   findAll() {
     return this.petsService.findAll();

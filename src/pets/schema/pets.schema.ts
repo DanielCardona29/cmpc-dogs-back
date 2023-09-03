@@ -5,10 +5,6 @@ import { subbreeds } from "src/subbreeds/schema/subbreeds.schema";
 
 @Table
 export class pets extends Model {
-    @PrimaryKey
-    @Column
-    id: string
-
     @Column
     name: string
     
