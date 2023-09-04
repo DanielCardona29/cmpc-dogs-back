@@ -20,11 +20,7 @@ export class CreatePetDto {
     @IsString()
     @IsOptional()
     img: string
-
-    @IsString()
-    @IsOptional()
-    keywords: string
-
+    
     @IsString()
     @IsOptional()
     breedId: string

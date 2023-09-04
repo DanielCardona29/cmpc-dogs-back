@@ -5,7 +5,6 @@ export class Pet {
     color: string
     characteristics: string
     img: string
-    keywords: string
     breedId: string
     subBreedID: string
 }

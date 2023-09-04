@@ -11,6 +11,8 @@ export class PetsController {
 
   @Post()
   create(@Body() createPetDto: CreatePetDto) {
+
+    console.log(createPetDto)
     return this.petsService.create(createPetDto);
   }
 
