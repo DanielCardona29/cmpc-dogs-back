@@ -1,73 +1,65 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Guía para Ejecutar una Aplicación NestJS
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Esta guía te ayudará a configurar y ejecutar una aplicación NestJS. Asegúrate de configurar `dbconfig` siguiendo las directrices de tu servidor de Postman antes de seguir estos pasos.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Requisitos Previos
 
-## Description
+Antes de comenzar, asegúrate de tener instalados los siguientes requisitos:
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+1. [Node.js](https://nodejs.org/): Asegúrate de tener Node.js instalado en tu sistema. Puedes verificar la instalación ejecutando `node -v` en la línea de comandos.
 
-## Installation
+2. [Postman](https://www.postman.com/): Asegúrate de tener Postman instalado para configurar y probar tu servidor.
 
-```bash
-$ npm install
-```
+## Pasos para Ejecutar la Aplicación NestJS
 
-## Running the app
+Sigue estos pasos para ejecutar la aplicación NestJS:
 
-```bash
-# development
-$ npm run start
+1. **Clona el Repositorio:** Clona el repositorio de la aplicación desde GitHub utilizando el siguiente comando:
 
-# watch mode
-$ npm run start:dev
+    ```bash
+    git clone https://github.com/tu-usuario/tu-repositorio.git
+    ```
 
-# production mode
-$ npm run start:prod
-```
+   Reemplaza `tu-usuario` y `tu-repositorio` con la URL de tu repositorio.
 
-## Test
+2. **Accede al Directorio de la Aplicación:** Navega al directorio de la aplicación clonada utilizando el comando `cd`:
 
-```bash
-# unit tests
-$ npm run test
+    ```bash
+    cd tu-repositorio
+    ```
 
-# e2e tests
-$ npm run test:e2e
+3. **Instala las Dependencias:** Instala las dependencias del proyecto utilizando npm (Node Package Manager). Ejecuta el siguiente comando:
 
-# test coverage
-$ npm run test:cov
-```
+    ```bash
+    npm install
+    ```
 
-## Support
+4. **Configura `dbconfig`:** Abre el archivo de configuración `dbconfig` y sigue las directrices de tu servidor de Postman para configurar la conexión a la base de datos. Por ejemplo:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+    ```javascript
+    // src/config/dbconfig.js
 
-## Stay in touch
+    module.exports = {
+      host: 'tu-host',
+      port: 'tu-puerto',
+      username: 'tu-usuario',
+      password: 'tu-contraseña',
+      database: 'tu-base-de-datos',
+    };
+    ```
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+5. **Inicia la Aplicación:** Una vez que hayas configurado `dbconfig`, puedes iniciar la aplicación con el siguiente comando:
 
-## License
+    ```bash
+    npm run start
+    ```
 
-Nest is [MIT licensed](LICENSE).
+   Esto iniciará tu servidor NestJS.
+
+6. **Verifica el Servidor:** Abre Postman y realiza las pruebas necesarias para verificar que tu servidor está funcionando correctamente y que se conecta a la base de datos según la configuración de `dbconfig`.
+
+## Detener la Aplicación
+
+Para detener la aplicación NestJS, regresa a la línea de comandos donde ejecutaste `npm run start` y presiona `Ctrl + C`. Confirmarás que deseas detener la aplicación y el servidor se cerrará.
+
+¡Listo! Ahora deberías poder ejecutar tu aplicación NestJS con la configuración de `dbconfig` siguiendo las directrices de tu servidor de Postman.
