@@ -37,6 +37,7 @@ export const DEFAULT_PET: Pet =  {
     age: '0',
     breedId: 'N/A',
     characteristics: "",
+    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Dog_silhouette.svg/2067px-Dog_silhouette.svg.png",
     color:  "default",
     keywords: "",
     subBreedID: "N/A",

@@ -14,6 +14,8 @@ export class pets extends Model {
     color: string
     @Column
     characteristics: string
+    @Column
+    img: string
     
     @ForeignKey(() => breeds)
     @Column

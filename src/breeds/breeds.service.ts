@@ -15,7 +15,9 @@ export class BreedsService {
 
       const newBreed = {
         ...DEFAULT_BREED,
-        ...breedRequest
+        ...breedRequest,
+        keywords: breedRequest.keywords.join(',')
+
       }
       return this.breedsProvider.create(newBreed);
     } catch (error) {

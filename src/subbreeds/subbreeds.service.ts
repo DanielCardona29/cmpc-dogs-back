@@ -14,7 +14,8 @@ export class SubbreedsService {
     try {
       const newBreed = {
         ...DEFAULT_SUBBREED,
-        ...subBreedRequest
+        ...subBreedRequest,
+        keywords: subBreedRequest.keywords.join(',')
       }
       return this.subBreedsProvider.create(newBreed);
     } catch (error) {

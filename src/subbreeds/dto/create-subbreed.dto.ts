@@ -1,4 +1,4 @@
-import { IsOptional, IsString } from "class-validator"
+import { IsArray, IsOptional, IsString } from "class-validator"
 
 export class CreateSubbreedDto {
     @IsString()
@@ -7,9 +7,12 @@ export class CreateSubbreedDto {
     @IsString()
     @IsOptional()
     commonName: string
-    @IsString()
+
+
+    @IsArray()
     @IsOptional()
-    keywords: string
+    keywords: string[]
+    
     @IsString()
     @IsOptional()
     breed: string

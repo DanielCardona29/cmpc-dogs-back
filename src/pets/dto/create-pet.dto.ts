@@ -16,7 +16,11 @@ export class CreatePetDto {
     @IsString()
     @IsOptional()
     characteristics: string
-    
+
+    @IsString()
+    @IsOptional()
+    img: string
+
     @IsString()
     @IsOptional()
     keywords: string

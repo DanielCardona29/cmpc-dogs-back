@@ -1,13 +1,15 @@
-import { IsOptional, IsString } from "class-validator"
+import { IsArray, IsOptional, IsString } from "class-validator"
 
 export class CreateBreedDto {
     @IsString()
     @IsOptional()
     scientificName: string
+    
     @IsString()
     @IsOptional()
     commonName: string
-    @IsString()
+
+    @IsArray()
     @IsOptional()
-    keywords: string
+    keywords: string[]
 }
